@@ -19,19 +19,19 @@ def read_gruneisen_yaml(filename):
     fileinfo = yaml.load(open(filename))
     phonon = fileinfo['phonon']
     for i in phonon:
-	band = i('band')
+	band = i['band']
 	for j in band:
-	frequency = j('frequency')
-        gruneisen = j('gruneisen')
+	frequency = j['frequency']
+        gruneisen = j['gruneisen']
     return (numpy.array(frequency), numpy.array(gruneisen))
 
 ##calculate the volume
 def volume_calc():
-    with open ("POSCAR") as f
+    with open ("POSCAR") as f:
         content = f.readlines()
-        a1 = [x.split[2] for x in content] 
-	b1 = [x.split[3] for x in content]
-	c1 = [x.split[4] for x in content]
+        a1 = [x[2].split() for x in content] 
+	b1 = [x[3].split() for x in content]
+	c1 = [x[4].split() for x in content]
 	ax, ay, az = float(a1[0]), float(a1[1]), float(a1[2])
         bx, by, bz = float(b1[0]), float(b1[1]), float(b1[2])
         cx, cy, cz = float(c1[0]), float(c1[1]), float(c1[2])	
@@ -46,10 +46,11 @@ def volume_calc():
 # calculate number of atoms in the cell
 
 def number_of_atoms_in_the_cell (primitive):
-    poscar = ('POSCAR')
+    poscar = 'POSCAR'
     cell = vasp.read_vasp(poscar)
     lattice, position, number = find_primitive(cell, symprec=1e-5)
-    return lattice, position, number
+    num = len(position)
+    return num 
 
 
 # Derived from phonopy code -- vasp.py -- read_vasp() -- used
@@ -63,10 +64,11 @@ def debye_temp(filename):
     """
     The filename should be : gruneisen.yaml
     Second moment : 
-    calculate by multiplying the frequency square and the density of state bot calculated by phonopy
-    calculate by using the weighted sum of the frquency square divided by sum of weights.
-
+    #calculate by multiplying the frequency square and the density of state bot calculated by phonopy
+    calculate by using the weighted sum of the frquency square divided by sum of weights
     """
+    
+
 
 def specific_heat_normal_mode(frequency, volume):
     """
