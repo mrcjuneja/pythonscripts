@@ -77,12 +77,13 @@ def specific_heat_normal_mode(frequency, volume):
 
 
 
-def mode_gruneisen(filename):
+def mode_gruneisen(temperature, frequencies, gruneisens):
     """
     Calculate the mode gruneisen parameter from specific heat and mode-wise gruneisen parameter
     """
+    for 
 
-    
+     
 
 
 
