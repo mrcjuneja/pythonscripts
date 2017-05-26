@@ -17,7 +17,7 @@ def read_gruneisen_yaml(filename):
     [frequencies, gruneisen parameter]
     """
     fileinfo = yaml.load(open(filename))
-    phonon = fileinfo('phonon')
+    phonon = fileinfo['phonon']
     for i in phonon:
 	band = i('band')
 	for j in band:
